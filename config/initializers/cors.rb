@@ -14,3 +14,14 @@
 #       methods: [:get, :post, :put, :patch, :delete, :options, :head]
 #   end
 # end
+Rails.application.config.middleware.insert_before 0, Rack::Cors do
+  allow do
+    origins 'localhost:4200' # Change to your frontend origin in production (e.g. 'http://localhost:3000')
+
+    resource '*',
+             headers: :any,
+             expose: ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+             methods: [:get, :post, :options, :delete, :put, :patch],
+             credentials: true
+  end
+end
