@@ -1,23 +1,21 @@
 class TodosController < ApplicationController
   before_action :authenticate_user!
   before_action :set_todo, only: %i[ update destroy ]
+  # STILL NEED TO HANDLE EDITs!
+  # Still need to handle deleetes
+  # still need to handle filtering...
+  # Still need to handle completing a todo
 
   # GET /todos
   def index
     @todos = current_user.todos
-    # @todos = Todo.all
 
     render json: @todos
   end
 
-  # GET /todos/1
-  # def show
-  #   render json: @todo
-  # end
-
   # POST /todos
   def create
-    @todo = Todo.new(todo_params)
+    @todo = current_user.todos.build(todo_params)
 
     if @todo.save
       render json: @todo, status: :created, location: @todo
