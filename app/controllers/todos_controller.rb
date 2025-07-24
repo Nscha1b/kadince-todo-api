@@ -4,8 +4,8 @@ class TodosController < ApplicationController
 
   # GET /todos
   def index
-    # @todos = current_user.todos
-    @todos = Todo.all
+    @todos = current_user.todos
+    # @todos = Todo.all
 
     render json: @todos
   end
