@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :todos
   mount_devise_token_auth_for "User", at: "auth"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -8,5 +9,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  resources :todos, except: [ :new, :show, :edit ]
   post "demo_login", to: "demos#demo_login"
 end
