@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+demo:
+  email: demo@example.com
+  name: Demo User
+  uid: 1
+  provider: email
+  encrypted_password: <%= BCrypt::Password.create('password', cost: 1) %>
+
+other:
+  email: other@example.com
+  name: Other User
+  uid: 2
+  provider: email
+  encrypted_password: <%= BCrypt::Password.create('password', cost: 1) %>

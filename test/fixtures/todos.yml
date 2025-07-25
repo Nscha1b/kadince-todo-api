@@ -1,15 +1,22 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  user: one
-  decription: MyText
-  completed: false
-  priority: MyString
+  title: Todo one
+  user: demo
+  description: description 1
+  completed: true
+  priority: 'high'
 
 two:
-  title: MyString
-  user: two
-  decription: MyText
+  title: Todo two
+  user: other
+  description: description 2
   completed: false
-  priority: MyString
+  priority: 'low'
+
+three:
+  title: Todo three
+  user: demo
+  description: description 3
+  completed: false
+  priority: 'medium'
