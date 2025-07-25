@@ -92,7 +92,7 @@ class TodosControllerTest < ActionDispatch::IntegrationTest
     end
 
     test "cant update another users todo" do
-      put todo_url( @not_demos_todo), params: { todo: { completed: true } }, as: :json, headers: @demo_headers
+      put todo_url(@not_demos_todo), params: { todo: { completed: true } }, as: :json, headers: @demo_headers
       assert_response :not_found
     end
   end
