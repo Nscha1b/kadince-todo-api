@@ -103,3 +103,13 @@ cable:
   production:
     <<: *default
     url: <%= ENV['DATABASE_URL'] %>
+
+queue:
+  production:
+    <<: *default
+    url: <%= ENV['DATABASE_URL'] %>
+
+cache:
+  production:
+    <<: *default
+    url: <%= ENV['DATABASE_URL'] %>
