@@ -52,3 +52,7 @@ group :development, :test do
   # stubbing requests
   gem "mocha"
 end
+
+group :production do
+  gem "rails_12factor"
+end
