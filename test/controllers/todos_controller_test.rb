@@ -36,6 +36,30 @@ class TodosControllerTest < ActionDispatch::IntegrationTest
       assert_response :success
     end
 
+    test "can get only completed todos" do
+      get "#{todos_url}?completed=true", headers: @demo_headers, as: :json
+      assert_response :success
+
+      data = JSON.parse(response.body)
+      found = data.any? { |todo| todo["id"] == @todo.id }
+      uncompleted_exists = data.any? { |todo| todo["id"] == @uncompleted_todo.id }
+
+      assert found, "Expected todo with id #{@todo.id} to be in the response"
+      assert_not uncompleted_exists, "Expected todo with id #{@uncompleted_todo.id} NOT to be in the response"
+    end
+
+    test "can get only items todo" do
+      get "#{todos_url}?completed=false", headers: @demo_headers, as: :json
+      assert_response :success
+
+      data = JSON.parse(response.body)
+      found = data.any? { |todo| todo["id"] == @todo.id }
+      uncompleted_exists = data.any? { |todo| todo["id"] == @uncompleted_todo.id }
+
+      assert_not found, "Expected todo with id #{@todo.id} NOT to be in the response"
+      assert uncompleted_exists, "Expected todo with id #{@uncompleted_todo.id} to be in the response"
+    end
+
     test "should not get other users todos" do
       get todos_url, as: :json, headers: @demo_headers
 

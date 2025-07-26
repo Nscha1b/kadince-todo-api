@@ -4,7 +4,7 @@ class TodosController < ApplicationController
   # still need to handle filtering...
 
   def index
-    @todos = current_user.todos
+    @todos = TodoFilter.new(current_user.todos, params).call
 
     render json: @todos
   end
