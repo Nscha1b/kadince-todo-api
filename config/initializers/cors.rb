@@ -16,11 +16,16 @@
 # end
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins "localhost:4200" # Change to your frontend origin in production (e.g. 'http://localhost:3000')
+    origins = if Rails.env.development?
+                %w[http://localhost:4200 http://127.0.0.1:4200]
+    else
+                [ "https://kadince-todo-frontend.onrender.com" ]
+    end
+    origins origins
 
     resource "*",
              headers: :any,
-             expose: [ "access-token", "expiry", "token-type", "uid", "client" ],
+             expose: %w[access-token expiry token-type uid client],
              methods: [ :get, :post, :options, :delete, :put, :patch ],
              credentials: true
   end
