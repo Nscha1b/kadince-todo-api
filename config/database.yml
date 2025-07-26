@@ -98,3 +98,8 @@ production:
 #    migrations_paths: db/cable_migrate
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
+
+cable:
+  production:
+    <<: *default
+    url: <%= ENV['DATABASE_URL'] %>
