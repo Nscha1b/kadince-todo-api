@@ -1,10 +1,15 @@
+require "tempfile"
+
 class TodosController < ApplicationController
+  # # include ActionView::Rendering
+  # include ActionView::Layouts
+
   before_action :authenticate_user!
   before_action :set_todo, only: %i[ update destroy ]
   # still need to handle filtering...
 
   def index
-    @todos = TodoFilter.new(current_user.todos, params).call
+    @todos = TodoFilter.new(current_user.todos, todos_params).call
 
     render json: @todos
   end
@@ -42,5 +47,9 @@ class TodosController < ApplicationController
 
     def todo_params
       params.expect(todo: [ :title, :user_id, :description, :priority, :completed ])
+    end
+
+    def todos_params
+      params.permit(:completed)
     end
 end

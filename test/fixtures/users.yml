@@ -3,13 +3,13 @@
 demo:
   email: demo@example.com
   name: Demo User
-  uid: 1
+  uid: demo@example.com
   provider: email
   encrypted_password: <%= BCrypt::Password.create('password', cost: 1) %>
 
 other:
   email: other@example.com
   name: Other User
-  uid: 2
+  uid: other@example.com
   provider: email
   encrypted_password: <%= BCrypt::Password.create('password', cost: 1) %>

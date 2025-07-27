@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Todos Report</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .todo-item {
+      border-top: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+      border-left: 4px solid transparent;
+      padding: 15px 15px 15px 20px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+    }
+    .todo-title {
+      font-weight: bold;
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 5px;
+    }
+    .todo-description {
+      color: #666;
+      margin-bottom: 10px;
+    }
+    .todo-meta {
+      font-size: 12px;
+      color: #888;
+    }
+    .completed {
+      text-decoration: line-through;
+      opacity: 0.7;
+    }
+    .priority-high { border-left-color: #FF6F91; }
+    .priority-medium { border-left-color: #7FB8D8; }
+    .priority-low { border-left-color: #CCCCCC; }
+    .priority-completed { border-left-color: #98D96A; }
+    .no-todos {
+      text-align: center;
+      color: #666;
+      font-style: italic;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+<% unless @current_user %>
+  <div>unauthorized</div>
+<% else %>
+  <h1>Todos Report</h1>
+  <% if @todos.any? %>
+    <% @todos.each do |todo| %>
+      <% if todo.completed %>
+        <div class="todo-item priority-completed">
+          <div class="todo-title completed">
+            <%= todo.title %>
+            ✓
+          </div>
+
+          <% if todo.description.present? %>
+            <div class="todo-description">
+              <%= todo.description %>
+            </div>
+          <% end %>
+
+          <div class="todo-meta">
+            Priority: <%= todo.priority.capitalize %> |
+            Status: Completed
+          </div>
+        </div>
+      <% else %>
+        <div class="todo-item priority-<%= todo.priority %>">
+          <div class="todo-title">
+            <%= todo.title %>
+          </div>
+
+          <% if todo.description.present? %>
+            <div class="todo-description">
+              <%= todo.description %>
+            </div>
+          <% end %>
+
+          <div class="todo-meta">
+            Priority: <%= todo.priority.capitalize %> |
+            Status: Pending
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% else %>
+    <div class="no-todos">
+      No todos found.
+    </div>
+  <% end %>
+<% end %>
+</body>
+</html>
