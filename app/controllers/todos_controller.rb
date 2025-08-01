@@ -6,7 +6,7 @@ class TodosController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_todo, only: %i[ update destroy ]
-  # still need to handle filtering...
+  rate_limit to: 10, within: 3.minutes, only: :create
 
   def index
     @todos = TodoFilter.new(current_user.todos, todos_params).call

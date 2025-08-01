@@ -4,6 +4,7 @@ class ReportsController < ApplicationController
   include ActionView::Rendering
 
   before_action :authenticate_user!
+  rate_limit to: 5, within: 3.minutes, only: :todo
 
   def todo
     @current_user = current_user
